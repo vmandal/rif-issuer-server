@@ -5,16 +5,11 @@ import UserModel from '@models/users.model';
 import { logger } from '@utils/logger';
 
 const { host, user, password, database, pool }: dbConfig = config.get('dbConfig');
+
 const sequelize = new Sequelize.Sequelize(database, user, password, {
   host: host,
-  dialect: 'mysql',
-  timezone: '+09:00',
-  define: {
-    charset: 'utf8mb4',
-    collate: 'utf8mb4_general_ci',
-    underscored: true,
-    freezeTableName: true,
-  },
+  dialect: 'sqlite',
+  storage: './database.sqlite',
   pool: {
     min: pool.min,
     max: pool.max,
