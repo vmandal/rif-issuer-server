@@ -13,6 +13,8 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
+    "@rsksmart/rif-id-ethr-did": "^0.1.0",
+    "@rsksmart/rif-node-utils": "^0.0.3",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
@@ -21,8 +23,10 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
+    "did-jwt-vc": "^2.1.0",
     "dotenv": "^8.2.0",
     "envalid": "^7.1.0",
+    "ethereumjs-util": "^7.0.10",
     "express": "^4.17.1",
     "helmet": "^4.5.0",
     "hpp": "^0.2.3",
@@ -30,6 +34,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
+    "nodemailer": "^6.6.0",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2",
     "swagger-jsdoc": "^6.0.0",
