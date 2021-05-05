@@ -41,6 +41,7 @@
     "swagger-ui-express": "^4.1.6",
     "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
+    "twilio": "^3.61.0",
     "typescript": "^4.2.4",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.2"

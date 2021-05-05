@@ -1,7 +1,0 @@
-{
-    "SMTP_HOST" : "localhost",
-    "SMTP_PORT": "1025",
-    "SMTP_USER": "",
-    "SMTP_PASS": "",
-    "Email_From": "vikram@t3in.com"
-}

@@ -51,3 +51,33 @@ export class IssuedCredentialDto {
   @IsString()
   public asset: string;
 }
+
+export class SmsCodeDto {
+  @IsString()
+  public mobile: string;
+
+  @IsString()
+  public did: string;
+}
+
+export class AddMobileDto {
+  @IsString()
+  public did: string;
+
+  @IsString()
+  public msg: string;
+
+  @IsString()
+  public sig: string;
+}
+
+export class TwilioCreateDto {
+  @IsString()
+  public to: string;
+
+  @IsString()
+  public from: string;
+
+  @IsString()
+  public body: string;
+}
