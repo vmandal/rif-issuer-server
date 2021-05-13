@@ -10,19 +10,37 @@ describe('IssuerService Tests', () => {
   const issuerRoute = new IssuerRoute();
   const app = new App([issuerRoute]);
 
-  it('createDidCode', async () => {
+  it('Store new code in DB', async () => {
     await app.getServer();
     const issuerService = new IssuerService();
-    const dca = await issuerService.createDidCode({ did: '123456', code: 'xyz', asset: 'test@test.com' });
-    expect(dca.id).toBeGreaterThan(0);
+    const newEntry = await issuerService.createDidCode({ did: '123456', code: 'xyz', asset: 'test@test.com' });
+    expect(newEntry.id).toBeGreaterThan(0);
   });
 
-  it('getDidCodeAsset', async () => {
+  it('Code expire test', async () => {
     await app.getServer();
     const issuerService = new IssuerService();
-    const dca = await issuerService.getDidCodeAsset({ did: '123456', code: 'xyz' }); // also deletes the entry
-    expect(dca.asset).toMatch('test@test.com');
-    const dca2 = await issuerService.getDidCodeAsset({ did: '123456', code: 'xyz' });
-    expect(dca2).toBeNull;
+    process.env = Object.assign(process.env, { CODE_EXPIRE_TIME: 1 }); // 1 millisecond
+    const readEntry = await issuerService.getDidCodeAsset({ did: '123456', code: 'xyz' }); // also deletes the entry
+    expect(readEntry).toBeNull;
+  });
+
+  it('Code can be used only once', async () => {
+    await app.getServer();
+    const issuerService = new IssuerService();
+    await issuerService.createDidCode({ did: '1234567', code: 'xyz', asset: 'test@test.com' });
+    process.env = Object.assign(process.env, { CODE_EXPIRE_TIME: 3600000 }); // restore
+
+    const readEntry = await issuerService.getDidCodeAsset({ did: '1234567', code: 'xyz' }); // also deletes the entry
+    expect(readEntry.asset).toMatch('test@test.com');
+
+    const readEntryAgain = await issuerService.getDidCodeAsset({ did: '1234567', code: 'xyz' });
+    expect(readEntryAgain).toBeNull;
+  });
+
+  test('get Issuer instance', () => {
+    const issuerService = new IssuerService();
+    const issuer = issuerService.getIssuer();
+    expect(issuer).toBeDefined();
   });
 });

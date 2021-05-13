@@ -3,6 +3,7 @@ export interface iDidCodeAsset {
   did: string;
   code: string;
   asset: string;
+  createdAt?: Date;
 }
 
 export interface iIssuedCredentials {

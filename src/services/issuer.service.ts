@@ -23,7 +23,11 @@ class IssuerService {
     // delete code - one time use only
     await this.didCodes.destroy({ where: { did: dc.did, code: dc.code } });
 
-    // todo: expirationTime check process.env.CODE_EXPIRE_TIME
+    // expirationTime check process.env.CODE_EXPIRE_TIME
+    const diff = new Date().getTime() - dca.createdAt.getTime();
+    if (diff > Number(process.env.CODE_EXPIRE_TIME)) {
+      return null;
+    }
     return dca;
   }
 

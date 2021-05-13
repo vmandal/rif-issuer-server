@@ -98,7 +98,7 @@ class IssuerController {
     try {
       // console.log('req.body=', req.body);
       const submittedData: SendVerificationMailDto = req.body;
-      const code = randomBytes(32).toString('hex');
+      const code = randomBytes(4).toString('hex');
 
       try {
         const dcaData: DidCodeAssetDto = { did: submittedData.did, code: code, asset: submittedData.email };

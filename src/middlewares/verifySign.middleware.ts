@@ -8,7 +8,6 @@ const verifySignMiddleware = (): RequestHandler => {
     try {
       const submittedData: AddMailDto = req.body;
       const signer = SignRecoverer(submittedData.msg, submittedData.sig);
-      console.log('signer=', signer);
       if (submittedData.did.split(':').slice(-1)[0].toLowerCase() !== signer.toLowerCase())
         next(new HttpException(401, '#1619960899 Invalid signature'));
       next();
